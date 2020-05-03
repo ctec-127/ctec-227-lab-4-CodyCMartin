@@ -5,7 +5,7 @@ $upload_errors = array(
     UPLOAD_ERR_INI_SIZE          => "Larger than upload_max_filesize.",
     UPLOAD_ERR_FORM_SIZE         => "Larger than form MAX_FILE_SIZE.",
     UPLOAD_ERR_PARTIAL             => "Partial upload.",
-    UPLOAD_ERR_NO_FILE             => "No file.",
+    UPLOAD_ERR_NO_FILE             => "No file selected.",
     UPLOAD_ERR_NO_TMP_DIR         => "No temporary directory.",
     UPLOAD_ERR_CANT_WRITE         => "Can't write to disk.",
     UPLOAD_ERR_EXTENSION         => "File upload stopped by extension."
@@ -38,8 +38,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 function display_images()
 {
     if (isset($_GET['file'])) {
-        unlink("uploads/" . $_GET['file']);
-        header("location: gallery.php");
+        if (unlink("uploads/" . $_GET['file'])) {
+            header("location: gallery.php");
+        } else {
+            echo "<p>Sorry, something went wrong.</p>";
+        }
     }
 
     $dir = "uploads";
@@ -48,8 +51,8 @@ function display_images()
             while ($filename = readdir($dir_handle)) {
                 $filename = urlencode($filename);
                 if (!is_dir($filename) && $filename != '.DS_Store') {
-                    echo "<div><img src=\"uploads/$filename\" alt=\"Upload photo\"</div>";
-                    echo "<a href=\"?file=$filename\">Delete this picture</a>";
+                    echo "<div class=\"col-md\"><img src=\"uploads/$filename\" alt=\"Upload photo\">";
+                    echo "<a href=\"?file=$filename\">Delete</a></div>";
                 }
             }
             closedir($dir_handle);
