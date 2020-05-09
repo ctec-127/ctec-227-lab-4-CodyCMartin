@@ -49,7 +49,7 @@ function display_images()
     if (is_dir($dir)) {
         if ($dir_handle = opendir($dir)) {
             while ($filename = readdir($dir_handle)) {
-                $filename = urlencode($filename);
+                $filename = rawurlencode($filename);
                 if (!is_dir($filename) && $filename != '.DS_Store') {
                     echo "<div class=\"col-md\"><img src=\"uploads/$filename\" alt=\"Upload photo\">";
                     echo "<a href=\"?file=$filename\">Delete</a></div>";
