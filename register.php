@@ -20,8 +20,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (!$result) {
         echo "<div>There was a problem registering your account</div>";
     } else {
+        // checking to see if folder exists. If not, make it
+        if (!is_dir($username)) {
+            mkdir($username);
+        }
+        header('location: login.php');
         echo "<div>You are now ready to go!</div>";
-        echo '<a href="login.php" title="Login Page">Login</a>';
     }
 }
 ?>

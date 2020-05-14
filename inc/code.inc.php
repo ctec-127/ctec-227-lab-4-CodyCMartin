@@ -1,5 +1,8 @@
 <?php
 
+session_start();
+
+
 $upload_errors = array(
     UPLOAD_ERR_OK                 => "No errors.",
     UPLOAD_ERR_INI_SIZE          => "Larger than upload_max_filesize.",
@@ -21,7 +24,18 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     $target_file = basename($_FILES['file_upload']['name']);
 
-    $upload_dir = 'uploads';
+    $upload_dir = $_SESSION['username'];
+
+    //testing
+    echo ($upload_dir);
+
+    // testing session variable set so we can gain access
+    if (isset($_SESSION['username'])) {
+        echo ("yes");
+    } else {
+        echo ("no");
+    }
+
 
     if (move_uploaded_file($tmp_file, $upload_dir . "/" . $target_file)) {
         $message = "File uploaded successfully";
@@ -30,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $message = $upload_errors[$error];
     }
 
-    $dir = "uploads";
+    $dir = $_SESSION['username'];
 }
 
 
@@ -38,20 +52,21 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 function display_images()
 {
     if (isset($_GET['file'])) {
-        if (unlink("uploads/" . $_GET['file'])) {
+        if (unlink($_SESSION['username'] . "/" . $_GET['file'])) {
             header("location: gallery.php");
         } else {
             echo "<p>Sorry, something went wrong.</p>";
         }
     }
 
-    $dir = "uploads";
+    $dir = $_SESSION['username'];
+
     if (is_dir($dir)) {
         if ($dir_handle = opendir($dir)) {
             while ($filename = readdir($dir_handle)) {
                 $filename = rawurlencode($filename);
                 if (!is_dir($filename) && $filename != '.DS_Store') {
-                    echo "<div class=\"col-md\"><img src=\"uploads/$filename\" alt=\"Upload photo\">";
+                    echo "<div class=\"col-4\"><img src=\"$dir/$filename\" alt=\"Upload photo\">";
                     echo "<a href=\"?file=$filename\">Delete</a></div>";
                 }
             }

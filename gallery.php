@@ -1,4 +1,6 @@
-<?php require_once 'inc/code.inc.php' ?>
+<?php require_once 'inc/code.inc.php';
+?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -12,7 +14,7 @@
 
 <body>
 	<div class="container text-center">
-		<h1 class="text-center">Welcome to your gallery!</h1>
+		<h1 class="text-center">Welcome to your gallery</h1>
 		<?php if (!empty($message)) {
 			echo "<p>{$message}</p>";
 		} ?>

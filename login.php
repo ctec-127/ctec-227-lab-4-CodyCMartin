@@ -7,22 +7,23 @@ require_once 'inc/db_connect.inc.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-    $email = $db->real_escape_string($_POST['email']);
+    $username = $db->real_escape_string($_POST['username']);
     $password = hash('sha512', $db->real_escape_string($_POST['password']));
 
-    $sql = "SELECT * FROM user WHERE email='$email' AND password='$password'";
-    //  echo $sql;
+    $sql = "SELECT * FROM gallery WHERE username='$username' AND password='$password'";
+    echo $sql;
 
     $result = $db->query($sql);
     if ($result->num_rows == 1) {
 
         $_SESSION['loggedin'] = 1;
-        $_SESSION['email'] = $email;
+        $_SESSION['username'] = $username;
+
 
         $row = $result->fetch_assoc();
         $_SESSION['first_name'] = $row['first_name'];
 
-        header('location: home.php');
+        header('location: gallery.php');
     } else {
         echo '<p>Please try again or go away</p>';
     }
@@ -31,9 +32,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 ?>
 
 <form action="login.php" method="POST">
-    <label for="email">Email</label>
+    <label for="username">Username</label>
     <br><br>
-    <input type="email" name="email" id="email" required>
+    <input type="username" name="username" id="username" required>
     <br><br>
     <label for="password">Password</label>
     <span id="showPassword" onclick="showPassword();">Show Password</span>
