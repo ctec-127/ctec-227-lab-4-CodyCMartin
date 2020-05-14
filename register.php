@@ -1,5 +1,4 @@
 <?php
-// register.php
 $pageTitle = "New User Registration";
 require 'inc/header.inc.php';
 require_once 'inc/db_connect.inc.php';

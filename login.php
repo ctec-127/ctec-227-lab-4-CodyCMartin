@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $password = hash('sha512', $db->real_escape_string($_POST['password']));
 
     $sql = "SELECT * FROM gallery WHERE username='$username' AND password='$password'";
-    echo $sql;
+
 
     $result = $db->query($sql);
     if ($result->num_rows == 1) {
@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         header('location: gallery.php');
     } else {
-        echo '<p>Please try again or go away</p>';
+        echo '<p>Incorrect combination please try again</p>';
     }
 }
 

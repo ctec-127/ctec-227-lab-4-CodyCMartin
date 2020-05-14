@@ -7,7 +7,7 @@ require 'inc/header.inc.php';
 
 <a href="register.php">Register</a>
 <a href="login.php" id="login">Login</a>
-<a href="" id="logout">Logout</a>
+<a href="logout.php" id="logout">Logout</a>
 
 <h1>Welcome to our great site <?= isset($_SESSION['first_name']) ? $_SESSION['first_name'] : 'New User!' ?></h1>
 <div id="message"></div>

@@ -27,14 +27,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $upload_dir = $_SESSION['username'];
 
     //testing
-    echo ($upload_dir);
+    // echo ($upload_dir);
 
-    // testing session variable set so we can gain access
-    if (isset($_SESSION['username'])) {
-        echo ("yes");
-    } else {
-        echo ("no");
-    }
+    // // testing session variable set so we can gain access
+    // if (isset($_SESSION['username'])) {
+    //     echo ("yes");
+    // } else {
+    //     echo ("no");
+    // }
 
 
     if (move_uploaded_file($tmp_file, $upload_dir . "/" . $target_file)) {
@@ -51,6 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
 function display_images()
 {
+
     if (isset($_GET['file'])) {
         if (unlink($_SESSION['username'] . "/" . $_GET['file'])) {
             header("location: gallery.php");
@@ -66,7 +67,7 @@ function display_images()
             while ($filename = readdir($dir_handle)) {
                 $filename = rawurlencode($filename);
                 if (!is_dir($filename) && $filename != '.DS_Store') {
-                    echo "<div class=\"col-4\"><img src=\"$dir/$filename\" alt=\"Upload photo\">";
+                    echo "<div class=\"col-md-4 col-xs-12\"><img src=\"$dir/$filename\" alt=\"Upload photo\">";
                     echo "<a href=\"?file=$filename\">Delete</a></div>";
                 }
             }

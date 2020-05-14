@@ -1,14 +1,13 @@
 /* style.css */
 
-#login, #logout {
-    /* set initial display to none */
-    display: none;
-}
-
 #showPassword {
     text-decoration: underline;
 }
 
 #showPassword:hover {
     cursor: pointer;
+}
+
+.mt {
+    margin-top: 5 !important;
 }

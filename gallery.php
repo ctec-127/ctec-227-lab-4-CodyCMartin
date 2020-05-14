@@ -1,4 +1,7 @@
-<?php require_once 'inc/code.inc.php';
+<?php
+
+require_once 'inc/code.inc.php';
+
 ?>
 
 
@@ -14,7 +17,8 @@
 
 <body>
 	<div class="container text-center">
-		<h1 class="text-center">Welcome to your gallery</h1>
+		<h1 class="text-center">Welcome to your gallery <?php echo $_SESSION['username'] . "!"; ?></h1>
+		<a href="logout.php" id="logout">Logout</a>
 		<?php if (!empty($message)) {
 			echo "<p>{$message}</p>";
 		} ?>
@@ -28,14 +32,12 @@
 
 				</div>
 		</form>
-	</div>
-	<div class="container text-center">
-		<div class="row">
-			<?php display_images(); ?>
+		<div class="container mt text-center">
+			<div class="row">
+				<?php display_images(); ?>
+			</div>
 		</div>
 	</div>
-
-
 
 </body>
 
