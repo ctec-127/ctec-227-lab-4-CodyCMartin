@@ -169,3 +169,31 @@ function logout()
 		header('location: login.php');
 	} else echo "not destroyed";
 }
+
+
+function display_images()
+{
+
+	if (isset($_GET['file'])) {
+		if (unlink($_SESSION['username'] . "/" . $_GET['file'])) {
+			header("location: gallery.php");
+		} else {
+			echo "<p>Sorry, something went wrong.</p>";
+		}
+	}
+
+	$dir = $_SESSION['username'];
+
+	if (is_dir($dir)) {
+		if ($dir_handle = opendir($dir)) {
+			while ($filename = readdir($dir_handle)) {
+				$filename = rawurlencode($filename);
+				if (!is_dir($filename) && $filename != '.DS_Store') {
+					echo "<div class=\"col-md-4 col-xs-12\"><img src=\"$dir/$filename\" alt=\"Upload photo\">";
+					echo "<a href=\"?file=$filename\">Delete</a></div>";
+				}
+			}
+			closedir($dir_handle);
+		}
+	}
+}

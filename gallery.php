@@ -1,5 +1,6 @@
 <?php
 require_once 'inc/code.inc.php';
+require_once 'inc/functions.inc.php';
 
 if (empty($_SESSION['username'])) {
 	header('location: login.php');

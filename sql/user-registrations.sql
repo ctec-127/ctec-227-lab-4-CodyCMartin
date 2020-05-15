@@ -13,7 +13,7 @@ SET time_zone
 -- Database: `lab5`
 --
 
---
+--P
 -- Table structure for table `gallery`
 --
 
