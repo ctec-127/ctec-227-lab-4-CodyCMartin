@@ -1,3 +1,4 @@
 <?php
-session_destroy();
-header('location: login.php');
+require_once 'inc/functions.inc.php';
+session_start();
+logout();
