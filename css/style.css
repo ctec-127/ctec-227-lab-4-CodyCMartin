@@ -28,7 +28,6 @@
     z-index: 1;
 }
 
-/* only used for background overlay not needed for centering */
 form:before {
     content: '';
     height: 100%;
@@ -39,4 +38,19 @@ form:before {
     background-color: rgba(0, 0, 0, 0.7);
     z-index: -1;
     border-radius: 10px;
+}
+
+.jumbotron {
+    margin-bottom: 0;
+    margin-bottom: 10px;
+}
+
+.pics {
+    border-radius: 10px;
+    background-color: cornsilk;
+    padding: 5px;
+}
+
+.btn {
+    margin: 5px;
 }

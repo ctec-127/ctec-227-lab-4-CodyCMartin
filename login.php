@@ -1,10 +1,8 @@
 <?php
-// login.php
 session_start();
 $pageTitle = 'Login';
-require 'inc/header.inc.php';
-require_once 'inc/db_connect.inc.php';
-require_once 'inc/functions.inc.php';
+require_once 'inc/header.inc.php';
+
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $errorString = "";
@@ -26,20 +24,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 ?>
-
-<!-- <form action="login.php" method="POST">
-    <label for="username">Username</label>
-    <br><br>
-    <input type="username" name="username" id="username" required>
-    <br><br>
-    <label for="password">Password</label>
-    <span id="showPassword" onclick="showPassword();">Show Password</span>
-    <br><br>
-    <input type="password" name="password" id="password" required>
-    <br><br>
-    <input type="submit" value="Login">
-</form> -->
-
 
 <section id="cover" class="min-vh-100">
     <div id="cover-caption">

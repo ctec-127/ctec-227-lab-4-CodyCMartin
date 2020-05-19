@@ -1,7 +1,9 @@
 <?php
-$pageTitle = "New User Registration";
-require 'inc/header.inc.php';
-require_once 'inc/db_connect.inc.php';
+session_start();
+
+$pageTitle = "Registration";
+require_once 'inc/header.inc.php';
+
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $db->real_escape_string($_POST['username']);
@@ -17,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $result = $db->query($sql);
 
     if (!$result) {
-        echo "<div>There was a problem registering your account</div>";
+        $errorString = 'Double check formatting';
     } else {
         // checking to see if folder exists. If not, make it
         if (!is_dir($username)) {
@@ -29,32 +31,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 ?>
 
-<!-- <h1>Register</h1>
-<form action="register.php" method="POST">
-    <label for="username">Username</label>
-    <input type="text" id="username" required name="username">
-    <br><br>
-    <label for="email">Email</label>
-    <input type="email" id="email" required name="email">
-    <br><br>
-    <label for="password">Password</label>
-    <input type="password" id="password" required name="password">
-    <br><br>
-    <label for="first_name">First Name</label>
-    <input type="text" id="first_name" required name="first_name">
-    <br><br>
-    <label for="last_name">Last Name</label>
-    <input type="text" id="last_name" required name="last_name">
-    <br><br>
-    <input type="submit" value="Register">
-</form> -->
-
-
 <section id="cover" class="min-vh-100">
     <div id="cover-caption">
         <div class="container">
             <div class="row text-white">
                 <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto text-center form p-4">
+                    <?php if (isset($errorString)) echo display_errors($errorString) ?>
                     <h1 class="display-4 py-2 text-truncate">Register</h1>
                     <div class="px-2">
                         <form action="register.php" method="POST" class="justify-content-center">

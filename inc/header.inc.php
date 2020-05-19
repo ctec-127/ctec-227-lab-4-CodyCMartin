@@ -1,3 +1,11 @@
+<?php
+
+require_once 'inc/db_connect.inc.php';
+require_once 'inc/functions.inc.php';
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,5 +17,10 @@
     <link rel="stylesheet" href="css/style.css">
     <title><?= $pageTitle ?></title>
 </head>
+<?php if ($pageTitle == "Login" || $pageTitle == "Registration") {
+    require_once 'inc/nav.inc.php';
+} else {
+    require_once 'inc/galleryNav.inc.php';
+} ?>
 
 <body>
